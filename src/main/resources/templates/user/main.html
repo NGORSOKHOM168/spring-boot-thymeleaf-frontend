@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{layouts/adminLayout}">
+<head>
+  <title>Content</title>
+</head>
+<body>
+<div class="content" layout:fragment="content">
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-header">
+            <h3>User Management</h3>
+			<a class="float-right btn btn-sm btn-outline-primary"
+			th:href="@{/user/create}">Add User</a>
+        </div>
+        <div class="card-body">
+          <table class="table table-striped">
+            <thead>
+            <tr>
+              <th scope="col">Username</th>
+              <th scope="col">Display Name</th>
+              <th scope="col">Thumbnail</th>
+              <th scope="col">Created At</th>
+			  <th scope="col">Link</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="item : ${data}" th:object="${item}">
+              <td th:text="*{username}"></td>
+              <td th:text="*{displayName}"></td>
+              <td>
+                <img style="width: 50px" th:src="@{/file/{thumbnail}(thumbnail=*{thumbnail})}" class="user-image" alt="User Image">
+              </td>
+              <td th:text="*{createdAt}"></td>
+              <td>
+                <a class="text-primary" href="#">View</a>|
+                <a class="text-success" href="#">Edit</a>|
+                <a class="text-danger" href="#">Delete</a>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
